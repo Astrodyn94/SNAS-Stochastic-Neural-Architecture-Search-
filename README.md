@@ -1,7 +1,7 @@
 # SNAS(Stochastic Neural Architecture Search)
 Pytorch implementation of SNAS (Caution : This is not official version and was not written by the author of the paper)
 
-Although the paper used local resource contraint as a regularizer, I didn't reproduce the regularizer in this work. 
+Although the paper used local resource contraint as a regularizer, I was not able to reproduce the regularizer in this work. 
 ## Requirements
 ```
 Python >= 3.6.5, PyTorch == 0.1
