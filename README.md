@@ -13,7 +13,7 @@ Note that the authors of the paper used 25000 images for training and validation
 ## Hyperparaeters
 Overall, I followed hyperparameters that were given in the paper.
 However, there were several parameters that were not given in the paper.
-Ex) Softmax Temperature ($\lambda $)$\text{S}_1(N) = \sum_{p=1}^N \text{E}(p)$
+Ex) Softmax Temperature ($$\lambda$$)$\text{S}_1(N) = \sum_{p=1}^N \text{E}(p)$
 
 ## Search Validation Accuracy
 ![1](./Search_Validation.png)
