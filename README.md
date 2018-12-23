@@ -40,3 +40,7 @@ Figure1 : Search Validation Accuracy with different initial softmax temperature
 <p align="center">
 Figure2 : Network Architecture of normal cell (left) and reduction cell (right)
 </p>
+
+## Reference
+https://github.com/quark0/darts/blob/master/README.md 
+Since SNAS follows training settings of DARTS, I reused the official pytorch codes of DARTS as a basic framework of this work.
