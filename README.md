@@ -48,7 +48,7 @@ Figure2 : Network Architecture of normal cell (left) and reduction cell (right)
 
 ## Network Architecture Comparison (at epoch 30)
 <p align="center">
-<img src="./Cell_comparison.png"  width="100%">
+<img src="./Cell_comparison.png"  width="60%">
 </p>
 <p align="center">
   
