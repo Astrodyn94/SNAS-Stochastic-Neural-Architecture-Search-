@@ -39,7 +39,7 @@ class Cell(nn.Module):
 
     self._ops = nn.ModuleList()
     self._bns = nn.ModuleList()
-    for i in range(self._steps): ##_steps is set to 4, which is number of the intermediate nodes
+    for i in range(self._steps):
       for j in range(2+i):
         stride = 2 if reduction and j < 2 else 1
         op = MixedOp(C, stride)
@@ -52,7 +52,7 @@ class Cell(nn.Module):
     states = [s0, s1]
     offset = 0
     for i in range(self._steps):
-      s = sum(self._ops[offset+j](h, Z[offset+j]) for j, h in enumerate(states)) ##Mixedop(C,stride)(x,weights)
+      s = sum(self._ops[offset+j](h, Z[offset+j]) for j, h in enumerate(states)) 
       offset += len(states)
       states.append(s)
 
@@ -70,39 +70,39 @@ class Network(nn.Module):
         self._steps = steps
         self._multiplier = multiplier
 
-        C_curr = stem_multiplier*C  ## output channel = stem_multiplier *input channel 
+        C_curr = stem_multiplier*C  
         self.stem = nn.Sequential(
         nn.Conv2d(3, C_curr, 3, padding=1, bias=False),
         nn.BatchNorm2d(C_curr)
         )
     
-        C_prev_prev, C_prev, C_curr = C_curr, C_curr, C  ## where C equals to the initial channel that is given. 
+        C_prev_prev, C_prev, C_curr = C_curr, C_curr, C  
         self.cells = nn.ModuleList()
         reduction_prev = False
         for i in range(layers):
-            if i in [layers//3, 2*layers//3]: ## layer is 8 , total number of the cell 
+            if i in [layers//3, 2*layers//3]: 
                 C_curr *= 2
                 reduction = True
             else:
-                reduction = False  ##   1/3 지점과 2/3 지점에 reduction cell 만들어준다 
+                reduction = False  
             cell = Cell(steps, multiplier, C_prev_prev, C_prev, C_curr, reduction, reduction_prev)
             reduction_prev = reduction
             self.cells += [cell]
-            C_prev_prev, C_prev = C_prev, multiplier*C_curr ##multipier is given 
+            C_prev_prev, C_prev = C_prev, multiplier*C_curr 
 
         self.global_pooling = nn.AdaptiveAvgPool2d(1)
         self.classifier = nn.Linear(C_prev, num_classes)
 
-        self._initialize_alphas()  ## alpha initialization 
+        self._initialize_alphas() 
         
     def forward(self, input , temperature):
-        s0 = s1 = self.stem(input) ## Initialization of states 
-        for i, cell in enumerate(self.cells):   ## cells는 8번 stack한 것이다. 
+        s0 = s1 = self.stem(input) 
+        for i, cell in enumerate(self.cells):  
             if cell.reduction:
-                Z, score_function = self.ArchitectDist(self.alphas_reduce , temperature) # shape = [14,8]
+                Z, score_function = self.ArchitectDist(self.alphas_reduce , temperature) 
             else:
                 Z, score_function = self.ArchitectDist(self.alphas_normal , temperature)
-            s0, s1 = s1, cell(s0, s1, Z) ## output cell하나 만드는데 이전 2개의 cell들이 필요하다. 
+            s0, s1 = s1, cell(s0, s1, Z) 
         out = self.global_pooling(s1) 
         logits = self.classifier(out.view(out.size(0),-1))
         return logits , score_function
@@ -125,29 +125,19 @@ class Network(nn.Module):
     def arch_parameters(self):
         return self._arch_parameters
 
-    '''
-    def ArchitectDist(self,alpha):
-
-        m = torch.distributions.relaxed_categorical.RelaxedOneHotCategorical(
-            torch.tensor([2.2]) , alpha) ###hyperparameter softmax temperature lambda was not given in the papaer... thus used 2.2
-        return m.sample() , -m.log_prob(m.sample())
-    '''
-
     def ArchitectDist(self,alpha,temperature):
 
         m = torch.distributions.relaxed_categorical.RelaxedOneHotCategorical(
-            torch.tensor([temperature]).cuda() , alpha) ###hyperparameter softmax temperature lambda was not given in the papaer... thus used 2.2
+            torch.tensor([temperature]).cuda() , alpha) 
         return m.sample() , -m.log_prob(m.sample())
 
     def _loss(self, input,target,temperature):
         logits,_ = self(input,temperature)
         return self._criterion(logits, target) 
 
-    ## targets and inputs should be given through DataSet 
     def Credit(self,input,target,temperature):
         loss = self._loss(input,target,temperature)
         dL = torch.autograd.grad(loss,input)[0]
         dL_dX = dL.view(-1); X = input.view(-1)
         credit = torch.dot(dL_dX.double() , X.double())
-        #credit = torch.autograd.grad(loss,input)[0] * input
         return credit
