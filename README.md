@@ -38,3 +38,5 @@ Figure1 : Search Validation Accuracy with different initial softmax temperature
 <img src="./Reduction_Cell.png" alt="Reduction Cell" width="40%">
 </p>
 <p align="center">
+Figure2 : Network Architecture of normal cell (left) and reduction cell (right)
+</p>
