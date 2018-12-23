@@ -11,7 +11,7 @@ Cifar-10 datasets were used, (5000 for training / 5000 for validation).
 
 Note that the authors of the paper used 25000 images for training and validation set, respectively.
 
-## Hyperparaeters
+## Hyperparameters
 Overall, I followed hyperparameters that were given in the paper.
 
 However, there are several parameters that were not given in the paper.
