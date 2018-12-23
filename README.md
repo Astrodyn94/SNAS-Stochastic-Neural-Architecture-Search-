@@ -13,8 +13,13 @@ Note that the authors of the paper used 25000 images for training and validation
 ## Hyperparaeters
 Overall, I followed hyperparameters that were given in the paper.
 However, there were several parameters that were not given in the paper.
-Ex) Softmax Temperature ($$\lambda$$)$\text{S}_1(N) = \sum_{p=1}^N \text{E}(p)$
-
+Ex) Softmax Temperature ($\lambda_{0}$) , annealiation rate of the softmax temperature, parameters regarding the levels of resource constraints
+Specifically, I found that search validation accuracy is highly influenced by initial softmax temperature (See Figure 1 for detail)
 ## Search Validation Accuracy
 ![1](./Search_Validation.png)
-Search Valication Accuracy. 
+<p align="center">
+<img src="./Search_Validation.png"  width="80%">
+</p>
+<p align="center">
+Figure1 : Search Validation Accuracy with different initial softmax temperature
+</p>
