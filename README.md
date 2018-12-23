@@ -21,7 +21,7 @@ Ex) Softmax Temperature ($ \lambda_{0} $) , annealiation rate of the softmax tem
 Specifically, I found that search validation accuracy is highly influenced by initial softmax temperature (See Figure 1 for detail)
 # Run the training code without regularization
 ```
-python main.py (can adjust hyperparameters in option/default_option,py)
+python main.py (can adjust hyperparameters in option/default_option.py)
 ```
 ## Search Validation Accuracy (without regularization)
 <p align="center">
