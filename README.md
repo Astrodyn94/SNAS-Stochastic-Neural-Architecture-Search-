@@ -16,7 +16,7 @@ Overall, I followed hyperparameters that were given in the paper.
 
 However, there are several parameters that were not given in the paper.
 
-Ex) Softmax Temperature ($\lambda_{0}$) , annealiation rate of the softmax temperature, parameters regarding the levels of resource constraints
+Ex) Softmax Temperature ($ \lambda_{0} $) , annealiation rate of the softmax temperature, parameters regarding the levels of resource constraints
 
 Specifically, I found that search validation accuracy is highly influenced by initial softmax temperature (See Figure 1 for detail)
 # Run the training code without regularization
