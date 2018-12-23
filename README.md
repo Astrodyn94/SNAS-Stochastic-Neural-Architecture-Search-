@@ -43,4 +43,5 @@ Figure2 : Network Architecture of normal cell (left) and reduction cell (right)
 
 ## Reference
 https://github.com/quark0/darts/blob/master/README.md 
+
 Since SNAS follows training settings of DARTS, I reused the official pytorch codes of DARTS as a basic framework of this work.
