@@ -13,8 +13,11 @@ Note that the authors of the paper used 25000 images for training and validation
 
 ## Hyperparaeters
 Overall, I followed hyperparameters that were given in the paper.
-However, there were several parameters that were not given in the paper.
+
+However, there are several parameters that were not given in the paper.
+
 Ex) Softmax Temperature ($\lambda_{0}$) , annealiation rate of the softmax temperature, parameters regarding the levels of resource constraints
+
 Specifically, I found that search validation accuracy is highly influenced by initial softmax temperature (See Figure 1 for detail)
 # Run the training code without regularization
 python main.py (can adjust hyperparameters in option/default_option,py)
@@ -29,7 +32,7 @@ Figure1 : Search Validation Accuracy with different initial softmax temperature
 
 ## Network Architecture (without regularization)
 <p align="center">
-<img src="img/Normal_cell.png" alt="Normal Cell" width="50%">
-<img src="img/Reduction_Cell.png" alt="Reduction Cell" width="50%">
+<img src="./Normal_cell.png" alt="Normal Cell" width="50%">
+<img src="./Reduction_Cell.png" alt="Reduction Cell" width="50%">
 </p>
 <p align="center">
