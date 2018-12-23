@@ -34,7 +34,7 @@ Figure1 : Search Validation Accuracy with different initial softmax temperature
 
 ## Network Architecture (without regularization)
 <p align="center">
-<img src="./Normal_cell.png" alt="Normal Cell" width="50%">
-<img src="./Reduction_Cell.png" alt="Reduction Cell" width="50%">
+<img src="./Normal_cell.png" alt="Normal Cell" width="40%">
+<img src="./Reduction_Cell.png" alt="Reduction Cell" width="40%">
 </p>
 <p align="center">
